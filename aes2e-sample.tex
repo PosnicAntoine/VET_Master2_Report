@@ -1,12 +1,12 @@
 % Sample file for AES paper
+% * <chatmans@free.fr> 2018-11-04T01:07:05.648Z:
+%
+% ^.
 \documentclass{aes2e}
 
 % Metadata Information
-\jyear{2010}
-\jmonth{October}
-\jvol{1}
-\jnum{1}
-
+\jyear{2018}
+\jmonth{November}
 
 \begin{document}
 
@@ -15,203 +15,207 @@
 
 
 % Title portion
-\title{Spectral Delay Filters\thanks{To whom correspondence should be addressed Tel: +1-240-381-2383; Fax: +1-202-508-3799; e-mail: info@schtm.org}}
+\title{Technology monitoring of KevoreeJS}
 
 %Author Info.
 \authorgroup{
-\author{A1FIRSTNAME A1LASTNAME},
-\role{AES Member}
-AND \author{A2FIRSTNAME A2LASTNAME},
-\role{AES Fellow}
-\email{(abc@abc.com)\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad (xyz@abc.com)}
-\affil{Universityxyz, City, Country}
+\author{Antoine POSNIC},
+\role{M2 IL Student}
+\email{(contact@posnicantoine.pro)}
+\affil{ISTIC, University Rennes 1, France}
+\affil{Based of the paper: "KevoreeJS: Enabling dynamic software reconfiguration in the browser"}
+\email{[DOI 10.1109/CBSE.2016.20]}
 }
 
 %Abstract
 \abstract{%
-This paper discusses the implementation of spectral delay using
-filters comprising a cascade of many low-order allpass filters and an
-equalizing filter. The spectral delay filters have chirp-like impulse
-responses causing a large, frequency-dependent delay that is useful in
-audio effects processing. An equalizing filter design and a multirate
-technique, which stretches the allpass filters, impulse
-response, are introduced.}
+This paper discusses of the OpenSource project: Kevoree. Developed by a small team of researchers, it is supported by the INRIA in France, and SnT in Luxembourg. It aims at offering a new approach for the newly popular Cloud-based applications, by helping in the design and deployment of Distributed Adaptable Systems. Kevoree supports both Java and Javascript, KevoreeJS implementing the Javascript part of Kevoree, we will talk of this side of the framework. The presentation of this tool will mainly be a summary of the following paper: "KevoreeJS: Enabling dynamic software reconfiguration in the browser"\cite{DEK1}, so I highly recommend to read it for further explanation. }
 
 
 \maketitle
 
 %Head 1
 \section{INTRODUCTION}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
+Nowadays, with the growth of Cloud-Based applications, we find ourselves using Internet browsers as container for various services and applications. And as traditional desktop-based softwares are moving to the cloud, multiple frameworks and developing tool have been and are being created. The most well known in the industry being AngularJS and React for example\cite{DEK1}. KevoreeJS is yet another one of these tools for developers, developed by a small team of researchers, it brings a new vision of web based applications. 
+\linebreak
+ 
+What is revolutionary about this new framework, is it worth to shift our current techniques toward this niche of a tool. What are the new features it brings to the table and does it have a real future?
+Those are the questions I will try to answer in this paper, studying the functionalities KevoreeJS offers, according to the team behind it.
+\linebreak
+ 
+In a first place I will try to pick out the differences with the common frameworks, and what type of new web applications it allows us to build. Followed by the challenges it overcame and those that it did not, to understand it's capabilities and limits. Finishing off by a motivation of using it and if it could create a breakthrough in our way to approach new web applications. 
 
-\section{CHIRP-LIKE IMPULSE RESPONSES AND GROUP DELAY}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses.  These filters have long chirp-like impulse responses.  These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
+%add usecase for the real VET
 
-%Head 2
-\subsection{Chirp-Like Impulse Responses and Group Delay}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
+\section{PRESENTATION OF KEVOREEJS}
 
-%Head 3
-\subsubsection{Chirp-Like Impulse Responses and Group Delay}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters.  When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-%Equation
-\begin{equation}
-A(z) = \frac{{a_1  + z^{ - 1} }}{{1 + a_1 z^{ - 1} }},
-\end{equation}
+KevoreeJS is a web application framework that provides tools for developers. It is based on Kevoree: a modeling framework that helps to create and manage distributed systems using an approach called model@runtime.\cite{DEK3}\cite{DEK4} As they called it, Kevoree "aims at taming the complexity of distributed adaptable systems (DDAS)"\cite{DEK4}. The idea behind KevoreeJS is being able to get one advantage of traditional desktop application: 
+
+The adaptability from the Microkernel Architecture (Also called Plug-in architecture). This architecture pattern allows a software that implements it, to receive some external plugin-components\cite{DEK2}. It allows applications to be easily adjustable, either for stability by plugins directed for supporting different kinds of systems surrounding an application such as an operating system. Or simply add more functionalities on the go, without having to change the core of the original application\cite{DEK2}.
+\linebreak
+ 
+Current web applications frameworks such as angularJS does not follow this adaptability like the traditional desktop application frameworks like OSGi. They usually just offer the recurrent Model View Controller pattern we see in web applications. This is where KevoreeJS differ from his peers, by shifting toward a framework like OSGi even though it doesn't inherently use the same principle.
+
+\subsection{Kevoree principles}
+Kevoree is based on this socalled model@runtime approach, a "reflection model which can be uncoupled [...] and automatically resynchro-nized"\cite{DEK1}. It allows it to decide the use of external packages that would act as plugins. These components can then be installed, removed, instantiated and started.
+\linebreak
+ 
+It also embodies the main concepts of distributed systems. It has: 
+\begin{enumerate}
+\item Components, like in objects programming language, that are different units providing the behaviors of the distributed system.
+\item Connectors (channels in Kevoree) that monitor and dictate the communications in between components; they can follow various communications protocols.
+\item Nodes are containers where components and connectors are executed. In Kevoree they are in charge of the execution of his components.
+\item Groups ensuring inter-nodes communications. They provide consistency of models between nodes
+\end{enumerate}
+
+Kevoree provides development model to build such concepts of distributed systems over multiple platforms\cite{DEK1}
+
+\subsection{KevoreeJS}
+Because Kevoree provides all the tools for runtime adaptations, KevoreeJS is just a "concrete implementations of abstract actions in order to achieve concrete tasks within a running Browser core"\cite{DEK1} with basic UI compositions. It is provided with development model in JavaScript and TypeScript for creating concepts enumerated previously, and a various set of tools, mainly:
+\begin{enumerate}
+\item Web-based architecture model editor.
+\item Yeoman generator, a code generating tool used here to create skeletons of new components.
+\item Grunt tasks, to automate packaging and publishing tasks for components.
+\item And finally a runtime container to manage the dynamic deployment of third-party libraries.
+\end{enumerate}
+
+Each component created this way is provided with his own vue. Meaning within a component we can still use framework such as AngularJS or others for the UI part. But they are also able to access the controller's scope properties that are given to it. 
+And below is the implementation of a basic component that is used as an usecase in ''KevoreeJS: Enabling dynamic software reconfigurations in the Browser'' \cite{DEK1}
+
+\begin{lstlisting}
+var AbstractComponent = require("kevoree-entities").AbstractComponent;
+
+var MyComp = AbstractComponent.extend({
+	toString:"MyComp",
+
+	/** This is an example of dictionary 
+    * attribute that you can set for 
+    * your entity 
+    */
+	dic yourAttrName:{
+		optional:false,
+		defaultValue:’aDefaultValue’,
+	},
+    
+    
+    construct:function(){
+		this.scope={};
+	},
+    
+    /**
+	* this method will be called by the 
+    * Kevoree platform when your component 
+    * has to start
+	* @param {Function} done
+	*/
+	start:function(done){
+		this.log.debug(this.toString(),"START") ;
+		this.scope.started=true;
+		// ...
+		done();
+	},
+    
+    /**
+	* this method will be called by 
+    * the Kevoree platform when your 
+    * component has to stop
+	* @param {Function} done
+	*/
+	stop:function(done){
+		this.log.debug(this.toString(),"STOP");
+		this.scope.started=stop;
+		done();
+    },
+    
+    /**
+	* this method is called by the 
+    * Browser Runtime in order to retrieve
+	* this component AngularJS UI controller
+	*/
+	uiController:function(){
+    	return["$scope","$timeout","instance", function($scope,$timeout,instance){
+			// this is your UI controller function
+			// $scope content is available directly within the browser/kevoree-comp-foocomp.html file
+			instance.scope=$scope;
+			$scope.started=instance.started;
+			$scope.foo="bar";
+			$scope.value=parseInt(Math.random()∗100);
+            
+            $scope . genValue = function ( ) {
+				$scope.value=parseInt(Math.random()∗100);
+            };
+        }];
+    }
+}); 
+\end{lstlisting}
+
+It is a basic implementation, but we can still appreciate the simplicity of it. The AbstractComponent is taking care of everything for the developer. You can find out more on the paper I am based on, with a showcase of how nodes can be configured together\cite{DEK1}. They also provide us with a documentation\cite{DEK4} and some examples in their repositories\cite{DEK5}.
+
+\subsection{The possibilities}
+
+Even though the cloud is exploding and desktop applications migrate toward our browsers, but there are still some desktop applications that does not take the plunge in the web. Current developing techniques for web applications lack in adaptability. IDE for example are exclusively on our desktop because they need to be able to receive plugins following the trending tools for developers. And this is exactly the type of applications KevoreeJS is trying to satisfy. By giving the possibilities to activate, install, stop and remove components within a web-application, without interrupting it.
+
+\section{CHALLENGES}
+
+For KevoreeJS to be accepted, like any other technologies, it has to face different challenges in it's field. Here as follows, are some of these issues it had to address, according to the team\cite{DEK1}. They are all focused on a standard, the single page web application (SPA). The goal being that it as to resolve their lack of dynamic reconfigurability, by complying with the current way to make them.
+Of course every challenge could not be answered. Like any others, this tool has strong and weak spots.
+
+\subsection{Challenges it addressed}
+First let's go for what it is made for. Current tools does not have the capacity to resolve their issue in adaptivity. They are simply made for addressing static dependencies. By adding a runtime with Kevoree that allows nodes to be started and stopped without interrupting the application, the pluggable architecture is validated.
+\linebreak
+ 
+Adaptivity and pluggable architecture, usually comes with the community trusting a new component before adding it. But the Web domain acts differently than the traditional desktop domain. A component will be expected to clearly explain what it does (through an interface for example). But generally web developers seem to have a different philosophy\cite{DEK1}. This challenge needs a shift in the mentality behind the web developing world. But by providing a development environment that support TypeScript to ensure interface compatibility, it answers this challenge depending on how developers would react.
+\linebreak
+ 
+The URL of a browser history also needs to be addressed: How to associate the URL saved in the history with the components that run, and will I be able to find the state of my application like I left it. You would need a history of actions and cached data\cite{DEK1}. The Kevoree team took the decision to link the browser history to the state of the components only. Not the configuration.
+\linebreak
+ 
+Performance wise, the KevoreeJS core only takes 20kbytes. According to current Internet bandwidth, the framework does not have an impact for normal uses.
 
 
+\subsection{Challenges it did not addressed}
 
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the \nobreak signal, but only introduces a phase shift or delay.\footnote{This point is emphasized by Loewer, see esp. p. (610).} Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-\begin{equation}
-\tau _{\textrm{g,max}}  = \left\{ \begin{array}{l}
- \tau _\textrm{g} (0) = \frac{{1 - a_1 }}{{1 + a_1 }},\textrm{when }a_1  \le 0 \\[4pt]
- \tau _\textrm{g} (\pi ) = \frac{{1 + a_1 }}{{1 - a_1 }},\textrm{when }a_1  > 0. \\
- \end{array} \right.\end{equation}
-
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-%Paragraph listing
-\begin{paralist}
-\item{}Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. 
-\item{}Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. 
-\item{}In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. 
-\item{}When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-\end{paralist}
-
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-\begin{arabiclist}
-\item{}Green--function determined experimentally and published.
-\item{}Black--function determined using similarity searches and published.
-\item{}Red--function determined using similarity searches and determined in this study.
-\item{}Blue--O-antigen structure unknown. Function determined using similarity searches and proposed in this study.
-\end{arabiclist}
-
-%Table
-\begin{table}
-\tabcolsep8.1pt
-\tbl{Active sites and allosteric sites of the GNE MNK enzyme}{%
-\begin{tabular}{@{}lccc@{}}\toprule
-Excerpt No.& Genre & Spatial Mode & Corrlation\\\colrule
- 1 & Pop       & FB   & 94\%\\
- 2 & Classical & FB   & 33\%\\
- 3 & Jazz      & FF   & 76\%\\
- 4 & Arabian   & FF   & 41\%\\
- 5 & GNE       & H220 & 45\%\\
- 6 & GNE       & H45  & 93\%\\
- 7 & MNK       & G416 & 74\%\\
- 8 & MNK       & D413 & 72\%\\
- 9 & MNK       & R420 & 94\%\\
-10 & MNK       & N516 & 91\%\\\botrule
-\end{tabular}}
-\begin{tabnote}
-Note. This table does not include sentence enhancement statutes.  This table does not include sentence enhancement statutes.
-\end{tabnote}
-\end{table}
-
-%Figure
-\begin{figure}
-\centering
-\includegraphics{aes2e-mouse.eps}
-\caption{The spectral delay filter consists of \textit{M} allpass filters and an equalization filter.}
-\end{figure}
-
-
-\begin{figure*}
-\centering
-\includegraphics[width=23pc]{aes2e-mouse.eps}
-\caption{This paper is organized as follows. In Section 1, we discuss the group delay of a cascade of first-order allpass filters and its relation to the chirp-like impulse response of the spectral delay filter. Furthermore, a multirate method to stretch the impulse response of the spectral delay filter is proposed. Section 2 discusses the amplitude envelope of the impulse response and suggests a design method for the equalizing filter. Section 3 presents application examples using the spectral delay filter. Section 4 concludes this paper.}
-\end{figure*}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay.
-\begin{extract}
-Filtering an audio signal with an allpass filter does not usually have
-a major effect on the signal's timbre. The allpass filter does not
-change the frequency content of the signal, but only introduces a
-phase shift or delay. Audibility of the phase distortion caused by an
-allpass filter in a sound reproduction system has been a topic of many
-studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we
-investigate audio effects \nobreak processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-\end{extract}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. 
-\[
-\tau _\textrm{g} (\omega ) =  - \frac{{d\phi (\omega )}}{{d\omega }}.
-\]
-Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect.
-\begin{alphalist}
-\item{}Green--function determined experimentally and published.
-\item{}Black--function determined using similarity searches and published.
-\item{}Red--function determined using similarity searches and determined in this study.
-\item{}Blue--O-antigen structure unknown. Function determined using similarity searches and proposed in this study.
-\end{alphalist}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. 
-%Enunciations
-\begin{example}
-In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. 
-\end{example}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies.
-\begin{bulletlist}
-\item{}Green--function determined experimentally and published.
-\item{}Black--function determined using similarity searches and published.
-\item{}Red--function determined using similarity searches and determined in this study.
-\item{}Blue--O-antigen structure unknown. Function determined using similarity searches and proposed in this study.
-\end{bulletlist}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-\begin{unnumlist}
-\item{}Green--function determined experimentally and published.
-\item{}Black--function determined using similarity searches and published.
-\item{}Red--function determined using similarity searches and determined in this study.
-\item{}Blue--O-antigen structure unknown. Function determined using similarity searches and proposed in this study.
-\end{unnumlist}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-
-\section{SUMMARY}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
+Currently there is no main Web actors that aim for dynamically reconfigurability. It doesn't mean it won't happen, but it is an important step for this dogma to spread. But by itself KevoreeJS uses a mashup of tools to provide with an initial UI composition mechanism. Still this does not provide enough for today's users interface needs.
+\linebreak
+ 
+The referencing of a single page application with dynamic component model is a big issue since search engines cannot index those reconfigurable applications. This however can be fixed by adding metadata to define the application role, but KevoreeJS doesn't provide any concepts to ensure it.
+\linebreak
+ 
+The previously seen issue linked to URL also goes to the analytics of the application, since tools like Google Analytics work on the initial loading of a page initiated by it. And it is a problem that the tool doesn't address.
 
 \section{CONCLUSION}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}. In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-
-\section{ACKNOWLEDGMENT}
-This research was conducted in fall 2008 when Vesa V\"alim\"aki was a visiting scholar at CCRMA, Stanford University. His visit was financed by the Academy of Finland (project no. 126310). The authors would like to Dr. Henri Penttinen for his comments and for the snare drum sample used in this work.
-
-
-Bibliography
+KevoreeJS is a unique piece of software. According to the related works of the Kevoree team\cite{DEK1}, there are some examples of adaptable web applications they pointed out. But none of them really provided a universal way to create a fully dynamically adaptable web application where there is no need to reload nor modify the browser itself. 
+\linebreak
+ 
+From a technical point of view, Kevoree is really interesting. It tries to answer the issue that some desktop applications might encounter if forked on the web. Which is crucial the Cloud becomes the standard platform for all applications. It would depend on the software market and users to give up on traditional software. But we never know what tomorrow is made out of, especially in informatics.
+\linebreak
+ 
+This framework isn't popular, at that time: only 36 star for Kevoree and 4 for KevoreeJS on github\cite{DEK5}. But it address a solution if adaptive web based applications became a real thing. This maybe will not become the next greatest web application framework, but could bring the basics behind the next one. That's why for tech and software savy people, it is an interesting set of tools to dive in.
+ 
 \begin{thebibliography}{99}
 
 \bibitem{DEK1}
-Preis D., ``Phase Distortion and Phase Equalization in Audio Signal Processing---A Tutorial Review,'' \textit{J. Audio Eng. Soc}, vol. 30, no. 11, pp. 774--794 (1982 Nov.).
-
+Kevoree Devs and Collaborators, ``KevoreeJS: Enabling dynamic software reconfigurations in the Browser''
+WICSA and CompArch 2016, Apr 2016, Venice, Italy. 2016, \href{https://hal.inria.fr/hal-01354997}{hal.inria}.
 
 \bibitem{DEK2}
-Abel J. S. and Berners D. P., ``MUS424/EE367D: Signal Processing Techniques for Digital Audio Effects," Unpublished Course Notes, CCRMA, Stanford University, Stanford, CA (2005).
+Mark Richards at O'Reilly, ``Software architecture patterns: Microkernel Architecture''
+August 15, 2015, \href{https://www.oreilly.com/ideas/software-architecture-patterns/page/4/microkernel-architecture}{O'Reilly Software Architecture}.
 
 \bibitem{DEK3}
-Roads C., ``Musical Sound Transformation by Convolution," in \textit{Proc. Int. Computer Music Conf.} (Tokyo, Japan, 1993), pp. 102--109.
+A. Moawad et al, ``Kevoree: A Component Based Software Platform'', 
+7th International Symposium, RuleML 2013, Seattle, WA, USA, July 11-13, 2013,
+\href{https://books.google.fr/books?id=Mkm6BQAAQBAJ&pg=PA164&redir_esc=y#v=onepage&q&f=false}{Theory, Practice, and Applications of Rules on the Web}.
 
 \bibitem{DEK4}
-Roads C., \textit{The Computer Music Tutorial}. MIT Press, Cambridge, MA, 1996.
+Kevoree Devs and Collaborators, ``Kevoree.org Documentation'',
+\href{http://kevoree.org/docs/getting-started/what-is-kevoree.html}{Kevoree.org}.
+
+\bibitem{DEK5}
+Kevoree Devs and Collaborators, ``Kevoree.org Repository''
+\href{https://github.com/kevoree/kevoree}{github.com/kevoree}.
+
 
 \end{thebibliography}
-
-%Appendix
-\appendix
-\section*{APPENDIX}
-Filtering an audio signal with an allpass filter does not usually have a major effect on the signal's timbre. The allpass filter does not change the frequency content of the signal, but only introduces a phase shift or delay. Audibility of the phase distortion caused by an allpass filter in a sound reproduction system has been a topic of many studies, see, e.g., \cite{DEK1}, \cite{DEK2}.
-\begin{equation}
-\phi (\omega ) =  - \omega  + 2\arctan \left( {\frac{{a_1 \sin \omega }}{{1 + a_1 \cos \omega }}} \right)
-\end{equation}
-
-In this paper, we investigate audio effects processing using high-order allpass filters that consist of many cascaded low-order allpass filters. These filters have long chirp-like impulse responses. When audio and music signals are processed with such a filter, remarkable changes are obtained that are similar to the spectral delay effect  \cite{DEK3}, \cite{DEK4}.
-
-
-\begin{nomenclature}[PAMPs]
-\subsection*{NOMENCLATURE}
-\nomentry{a$_c$}{condensation coefficient condensation coefficient condensation coefficient}
-
-
-\nomentry{TLR}{Toll-like receptor}
-
-\nomentry{PAMPs}{pathogen-associated molecular patterns condensation coefficient condensation}
-\end{nomenclature}
-
-%Biography
- \biography{A1firstname A1lastname}{a.eps}{A1firstname A1lastname is professor of audio signal processing at Helsinki University of Technology (TKK), Espoo, Finland. He received his Master of Science in Technology, Licentiate of Science in Technology, and Doctor of Science in Technology degrees in electrical engineering from TKK in 1992, 1994, and 1995, respectively. His doctoral dissertation dealt with fractional delay filters and physical modeling of musical wind instruments. Since 1990, he has worked mostly at TKK with the exception of a few periods. In 1996 he spent six months as a postdoctoral research fellow at the University of Westminster, London, UK. In 2001-2002 he was professor of signal processing at the Pori School of Technology and Economics, Tampere University of Technology, Pori, Finland. During the academic year 2008-2009 he has been on sabbatical and has spent several months as a visiting scholar at the Center for Computer Research in Music and Acoustics (CCRMA), Stanford University, Stanford, CA. His research interests include musical signal processing, digital filter design, and acoustics of musical instruments. Prof. V\"alim\"aki is a senior member of the IEEE Signal Processing Society and is a member of the AES, the Acoustical Society of Finland, and the Finnish Musicological Society. He was the chairman of the 11th International Conference on Digital Audio Effects (DAFx-08), which was held in Espoo, Finland, in 2008.}
- \biography{A2firstname A2lastname}{b.eps}{A2firstname A2lastname is a consulting professor at the Center for Computer Research in Music and Acoustics (CCRMA) in the Music Department at Stanford University where his research interests include audio and music applications of signal and array processing, parameter estimation, and acoustics. From 1999 to 2007, Abel was a co-founder and chief technology officer of the Grammy Award-winning Universal Audio, Inc. He was a researcher at NASA/Ames Research Center, exploring topics in room acoustics and spatial hearing on a grant through the San Jose State University Foundation. Abel was also chief scientist of Crystal River Engineering, Inc., where he developed their positional audio technology, and a lecturer in the Department of Electrical Engineering at Yale University. As an industry consultant, Abel has worked with Apple, FDNY, LSI Logic, NRL, SAIC and Sennheiser, on projects in professional audio, GPS, medical imaging, passive sonar and fire department resource allocation. He holds Ph.D. and M.S. degrees from Stanford University, and an S.B. from MIT, all in electrical engineering. Abel is a Fellow of the Audio Engineering Society.}
 \end{document}
+

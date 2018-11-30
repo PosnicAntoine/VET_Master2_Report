@@ -1177,26 +1177,22 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Page styles  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-\def\jvol#1{\gdef\@jvol{#1}}
-\def\jnum#1{\gdef\@jnum{#1}}
 \def\jmonth#1{\gdef\@jmonth{#1}}
 \def\jyear#1{\gdef\@jyear{#1}}
 \def\jname#1{\gdef\@jname{#1}}
 %
-\def\@jvol{}
-\def\@jnum{}
 \def\@jmonth{}
 \def\@jyear{}
-\def\@jname{J. Audio Eng. Sco.}
+\def\@jname{Antoine POSNIC}
 %
 \def\oddfolio{{\foliofont\thepage}}
 \def\evenfolio{{\foliofont\thepage}}
 %
 \def\ps@headings{%
-    \def\@evenhead{{\rhfont\leftmark}\hfil{\rhfont PAPERS}}%
-    \def\@oddhead{{\rhfont PAPERS}\hfil{\rhfont\rightmark}}%
-    \def\@evenfoot{\hbox to \textwidth{\rhfont\evenfolio\hfill \@jname, Vol.\ \@jvol,\ No.\ \@jnum,\ \@jyear\ \@jmonth}}%
-    \def\@oddfoot{\hbox to \textwidth{\rhfont \@jname, Vol.\ \@jvol,\ No.\ \@jnum,\ \@jyear\ \@jmonth\hfill\oddfolio}}%
+    \def\@evenhead{\hfil{\rhfont Technology Monitoring}}%
+    \def\@oddhead{{\rhfont Technology Monitoring}\hfil}%
+    \def\@evenfoot{\hbox to \textwidth{\rhfont\evenfolio\hfill \@jname, \@jyear\ \@jmonth}}%
+    \def\@oddfoot{\hbox to \textwidth{\rhfont \@jname, \@jyear\ \@jmonth\hfill\oddfolio}}%
     \let\@mkboth\markboth
     \def\chaptermark##1{\markboth{##1}{##1}}%
 }
@@ -1216,10 +1212,10 @@
 \def\bottomfoot#1{\gdef\bottom@foot{#1}}
 %
 \def\ps@plain{\let\@mkboth\@gobbletwo%
-       \def\@evenhead{\hbox to \textwidth{\hfill\rhfont PAPERS}}%
-       \def\@oddhead{\hbox to \textwidth{\rhfont PAPERS\hfill}}%
-       \def\@evenfoot{\hbox to \textwidth{\rhfont\thepage\hfill \@jname, Vol.\ \@jvol,\ No.\ \@jnum,\ \@jyear\ \@jmonth}}%
-       \def\@oddfoot{\hbox to \textwidth{\rhfont \@jname, Vol.\ \@jvol,\ No.\ \@jnum,\ \@jyear\ \@jmonth\hfill\thepage}}%
+       \def\@evenhead{\hbox to \textwidth{\hfill\rhfont Technology Monitoring}}%
+       \def\@oddhead{\hbox to \textwidth{\rhfont Technology Monitoring\hfill}}%
+       \def\@evenfoot{\hbox to \textwidth{\rhfont\thepage\hfill \@jname, \@jyear\ \@jmonth}}%
+       \def\@oddfoot{\hbox to \textwidth{\rhfont \@jname, \@jyear\ \@jmonth\hfill\thepage}}%
 }%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  End Page styles  %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1700,8 +1696,6 @@ $\displaystyle{##}$\hfil%
 \printbiocount\biocount%
 \tempcount=\z@%
 \begin{strip}\par\addvspace{\baselineskip}
-\noindent\vrule height1pt width\textwidth\par\addvspace{\baselineskip}
-{\sectionfont\centering THE \ifnum\biocount=\@ne AUTHOR\else AUTHORS\fi\par\addvspace{\baselineskip}}%
 \begingroup%
 \loop%
 \ifnum\printbiocount>0%
